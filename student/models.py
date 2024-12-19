@@ -34,6 +34,9 @@ class Subject(models.Model):
     )
     credits = models.IntegerField(validators=[MinValueValidator(1)])
     description = models.TextField(blank=True)
+    
+    def __str__(self):
+        return f"{self.subject_name} ({self.subject_code})"
 
 class Faculty(models.Model):
     first_name = models.CharField(max_length=50)
@@ -48,6 +51,9 @@ class Faculty(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='active')
     subjects = models.ManyToManyField(Subject, through='FacultySubject')
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 class FacultySubject(models.Model):
     faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
@@ -57,3 +63,6 @@ class FacultySubject(models.Model):
 
     class Meta:
         unique_together= ['faculty', 'subject']
+
+    def __str__(self):
+        return f"{self.faculty} - {self.subject}"
