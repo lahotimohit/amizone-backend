@@ -6,7 +6,7 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ('course_name',)
     list_filter = ('duration_years',)
 
-class UserAdmin(admin.ModelAdmin):
+class StudentAdmin(admin.ModelAdmin):
     list_display = ('enrollment_number', "first_name", "last_name", "course", "current_semester", "email")
     search_fields = ('enrollment_number', "first_name", "last_name", "email")
     list_filter = ('course', 'current_semester')
@@ -37,7 +37,7 @@ class FacultySubjectAdmin(admin.ModelAdmin):
     list_filter = ('semester',)
 
 admin.site.register(models.Course, CourseAdmin)
-admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Student, StudentAdmin)
 admin.site.register(models.Subject, SubjectAdmin)
 admin.site.register(models.Faculty, FacultyAdmin)
 admin.site.register(models.FacultySubject, FacultySubjectAdmin)
