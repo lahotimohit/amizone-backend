@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-f=25ye1ikyoesk)3w@a8==v2h7koo%lsgr81t7^dd$b2s5x97-'
 DATABASE_URL = "postgresql://amizone_db_user:UXv6v8OAtPOSbYrrtGlgZtkGSBEkvgpx@dpg-cti4ff8gph6c73d52fsg-a.oregon-postgres.render.com/amizone_db"
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -25,6 +25,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -98,7 +99,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = []
+STATIC_ROOT = BASE_DIR / "staticfiles" / "static"
+
+if DEBUG:
+    STATICFILES_DIRS=['staticfiles']
+    STATIC_ROOT = None
+else:
+    STATICFILES_DIRS=[]
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
