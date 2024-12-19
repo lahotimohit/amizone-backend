@@ -21,7 +21,7 @@ class Student(models.Model):
     )
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, blank=True)
-    profile_photo = models.ImageField(upload_to="profile_photos/student/", blank=True)
+    profile_photo = models.ImageField(upload_to="profile_photos/student/", blank=True, default="user.png")
 
     def __str__(self):
         return self.enrollment_number
@@ -50,7 +50,7 @@ class Faculty(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15, blank=True)
-    profile_photo = models.ImageField(upload_to="profile_photos/faculty/", blank=True)
+    profile_photo = models.ImageField(upload_to="profile_photos/faculty/", blank=True, default="user.png")
     STATUS_CHOICES = [
         ('active', 'Active'),
         ('inactive', 'Inactive')
