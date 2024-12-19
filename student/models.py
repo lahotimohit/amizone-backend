@@ -10,7 +10,7 @@ class Course(models.Model):
     def __str__(self):
         return self.course_name
 
-class User(models.Model):
+class Student(models.Model):
     enrollment_number = models.CharField(max_length=20, primary_key=True)
     password = models.CharField(max_length=20, default="abc@123")
     first_name = models.CharField(max_length=50)
@@ -34,6 +34,12 @@ class Subject(models.Model):
         validators=[MinValueValidator(1), MaxValueValidator(12)]
     )
     credits = models.IntegerField(validators=[MinValueValidator(1)])
+    SUB_CHOICES = [
+        ('compulsory', "Compulsory"),
+        ('elective', "Elective"),
+        ('fbl', "FBL")
+    ]
+    subject_type = models.CharField(max_length=10, choices=SUB_CHOICES, default="compulsory")
     description = models.TextField(blank=True)
     
     def __str__(self):
