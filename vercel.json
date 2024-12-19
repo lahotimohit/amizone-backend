@@ -1,9 +1,21 @@
 {
-    "builds": [{
-        "src": "amizone/wsgi.py",
-        "use": "@vercel/python",
-        "config": {"maxLambdaSize": "15mb", "runtime": "python3.10"}
-    }],
+    "builds": [
+        {
+            "src": "amizone/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.10"
+            }
+        },
+        {
+            "src": "build_static.sh",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "staticfiles"
+            }
+        }
+    ],
     "routes": [
         {
             "src": "/static/(.*)",
