@@ -1,8 +1,10 @@
 from pathlib import Path
+from urllib.parse import urlparse
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-f=25ye1ikyoesk)3w@a8==v2h7koo%lsgr81t7^dd$b2s5x97-'
+DATABASE_URL = "postgresql://amizone_db_user:UXv6v8OAtPOSbYrrtGlgZtkGSBEkvgpx@dpg-cti4ff8gph6c73d52fsg-a.oregon-postgres.render.com/amizone_db"
 
 DEBUG = True
 
@@ -52,10 +54,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'amizone.wsgi.application'
 
+url = urlparse(DATABASE_URL)
+
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': url.path[1:],  # Remove the leading slash
+        'USER': url.username,
+        'PASSWORD': url.password,
+        'HOST': url.hostname,
+        'PORT': url.port,
     }
 }
 
