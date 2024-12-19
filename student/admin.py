@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import User, Group
 from . import models
 
 class CourseAdmin(admin.ModelAdmin):
@@ -36,6 +37,8 @@ class FacultySubjectAdmin(admin.ModelAdmin):
                     'subject__subject_name')
     list_filter = ('semester',)
 
+admin.site.unregister(User)
+admin.site.unregister(Group)
 admin.site.register(models.Course, CourseAdmin)
 admin.site.register(models.Student, StudentAdmin)
 admin.site.register(models.Subject, SubjectAdmin)
