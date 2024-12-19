@@ -12,6 +12,7 @@ class Course(models.Model):
 
 class User(models.Model):
     enrollment_number = models.CharField(max_length=20, primary_key=True)
+    password = models.CharField(max_length=20, default="abc@123")
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
