@@ -23,7 +23,7 @@ class StudentLogin(APIView):
             return Response({"message": "Internal Server Error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class StudentSubjects(APIView):
-    def get(self, request):
+    def post(self, request):
         try:
             enrollment = request.data["enrollment"]
             student = models.Student.objects.get(enrollment_number=enrollment)
@@ -105,7 +105,7 @@ class StudentSubjects(APIView):
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 class StudentsSubFaculties(APIView):
-    def get(self,request):
+    def post(self,request):
         enrollment = request.data["enrollment"]
         try:
             student = models.Student.objects.get(enrollment_number=enrollment)

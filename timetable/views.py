@@ -7,7 +7,7 @@ from . import models
 from django.db.models import Q
 
 class ClassesByDay(APIView):
-    def get(self, request):
+    def post(self, request):
         day = request.data["day"]
         enrollment = request.data['enrollment']
         student = Student.objects.get(enrollment_number=enrollment)
@@ -43,7 +43,7 @@ class ClassesByDay(APIView):
 
 
 class StudentAttendanceData(APIView):
-    def get(self, request):
+    def post(self, request):
         enrollment = request.data['enrollment']
         try:
             student = Student.objects.get(enrollment_number=enrollment)
