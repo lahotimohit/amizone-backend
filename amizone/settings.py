@@ -57,18 +57,18 @@ WSGI_APPLICATION = 'amizone.wsgi.application'
 url = urlparse(DATABASE_URL)
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
     # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': url.path[1:],  # Remove the leading slash
-    #     'USER': url.username,
-    #     'PASSWORD': url.password,
-    #     'HOST': url.hostname,
-    #     'PORT': url.port,
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': url.path[1:],  # Remove the leading slash
+        'USER': url.username,
+        'PASSWORD': url.password,
+        'HOST': url.hostname,
+        'PORT': url.port,
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
