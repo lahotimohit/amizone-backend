@@ -1,5 +1,13 @@
 from django.db import models
+import cloudinary
+from cloudinary.models import CloudinaryField
 from django.core.validators import MinValueValidator, MaxValueValidator
+
+cloudinary.config(
+    cloud_name="dvjg6st2t",
+    api_key="352511942345566",
+    api_secret="JyGRhYmoWMZbE2r21GCwnCv4fyg"
+)
 
 # Create your models here.
 class Course(models.Model):
@@ -21,7 +29,7 @@ class Student(models.Model):
     )
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15, blank=True)
-    profile_photo = models.ImageField(upload_to="profile_photos/student/", blank=True, default="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1734680185~exp=1734683785~hmac=f9b04247a49be314c1331261710c4d2ae60fd615b3ead656ebc5cd605067ec38&w=740")
+    profile_photo = CloudinaryField("image", blank=True,default="cjkou0lq67se1odjzbrq")
 
     def __str__(self):
         return self.enrollment_number
@@ -50,7 +58,7 @@ class Faculty(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15, blank=True)
-    profile_photo = models.ImageField(upload_to="profile_photos/faculty/", blank=True, default="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1734680185~exp=1734683785~hmac=f9b04247a49be314c1331261710c4d2ae60fd615b3ead656ebc5cd605067ec38&w=740")
+    profile_photo = CloudinaryField('image', blank=True, default="cjkou0lq67se1odjzbrq")
     STATUS_CHOICES = [
         ('active', 'Active'),
         ('inactive', 'Inactive')
